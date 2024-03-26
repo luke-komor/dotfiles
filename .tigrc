@@ -1,0 +1,9 @@
+bind generic @ @sh -c "\
+  ( \
+    tmux has-session -t '.{last}' \
+    && tmux respawn-pane -t '.{last}' -k 'LESS= DELTA_PAGER=\"less -R\" git show %(commit)' \
+  ) \
+  || tmux split-window -hf -l 60% 'LESS= DELTA_PAGER=\"less -R\" git show %(commit)'"
+
+bind generic Y !sh -c "echo -n %(commit) | xclip -selection c && echo Copied %(commit) to clipboard"
+bind generic T !sh -c "echo -n %(commit) | xclip -selection c && echo Copied %(commit) to clipboard"
