@@ -2,7 +2,7 @@ export ZSH="$HOME/.oh-my-zsh"
 #export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0
 
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=true
-ZSH_THEME=""
+#ZSH_THEME=""
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#808080'
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 plugins=(git zsh-autosuggestions history-substring-search zsh-syntax-highlighting colored-man-pages)
@@ -30,6 +30,6 @@ fzf_gl() {
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # export TERM=xterm-kitty
-alias lg=lazygit
+#alias lg=lazygit
 bindkey -e
-eval $(starship init zsh)
+eval "$(starship init zsh)"
