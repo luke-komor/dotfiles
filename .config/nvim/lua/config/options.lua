@@ -14,7 +14,7 @@ vim.b.autoformat = false -- buffer-local
 vim.g.base16_colorspace = 256
 -- vim.o.autoread = true
 
-opt.listchars="tab:>-,trail:~,extends:>,precedes:<"
+-- opt.listchars="tab:>-,trail:~,extends:>,precedes:<"
 vim.o.guifont = "JetBrainsMono Nerd Font:h10" -- text below applies for VimScript
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,terminal"
 vim.opt.fillchars = vim.opt.fillchars + "diff: "

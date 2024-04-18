@@ -17,10 +17,19 @@ return {
 			colorscheme = "catppuccin",
 		},
 	},
-    {
-        "xiyaowong/transparent.nvim",
-        lazy = false
-    },
+	{
+		"xiyaowong/transparent.nvim",
+		lazy = false,
+		opts = {
+			extra_groups = {
+				"NormalFloat", -- plugins which have float panel such as Lazy, Mason, LspInfo
+				"NeoTreeNormal", -- NvimTree
+				"NeoTreeNormalNC",
+                "NeoTreeVertSplit",
+                "NeoTreeWinSeparator"
+			},
+		},
+	},
 	-- { -- Theme inspired by Atom
 	--     'navarasu/onedark.nvim',
 	--     priority = 1000,
@@ -38,26 +47,26 @@ return {
 		name = "catppuccin",
 		priority = 1000,
 		config = function()
-            local os_theme_path = vim.fn.expand("$HOME/os_theme")
-            local os_theme_readable = vim.fn.filereadable(os_theme_path) == 1 and true or false
+			local os_theme_path = vim.fn.expand("$HOME/os_theme")
+			local os_theme_readable = vim.fn.filereadable(os_theme_path) == 1 and true or false
 
-            if os_theme_readable then
-                local theme = vim.fn.readfile(os_theme_path)[1]
-			    vim.cmd("set background="..theme)
-            end
+			if os_theme_readable then
+				local theme = vim.fn.readfile(os_theme_path)[1]
+				vim.cmd("set background=" .. theme)
+			end
 
 			require("catppuccin").setup()
 		end,
 	},
-    {
-        "rcarriga/nvim-notify",
-        opts = {
-            background_colour = "#000000",
-        },
-        config = function(_, opts)
-            require("notify").setup(opts)
-        end
-    },
+	{
+		"rcarriga/nvim-notify",
+		opts = {
+			background_colour = "#000000",
+		},
+		config = function(_, opts)
+			require("notify").setup(opts)
+		end,
+	},
 	{
 		"folke/twilight.nvim",
 	},
@@ -221,6 +230,71 @@ return {
 		opts = {
 			options = {
 				mode = "tabs",
+			},
+		},
+	},
+	{
+		"echasnovski/mini.indentscope",
+		opts = {
+			-- symbol = "▏",
+			symbol = "│",
+			options = { try_as_border = true },
+		},
+		init = function()
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = {
+					"help",
+					"alpha",
+					"dashboard",
+					"neo-tree",
+					"Trouble",
+					"trouble",
+					"lazy",
+					"mason",
+					"notify",
+					"toggleterm",
+					"lazyterm",
+					"markdown",
+				},
+				callback = function()
+					vim.b.miniindentscope_disable = true
+				end,
+			})
+		end,
+	},
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		event = "LazyFile",
+		opts = {
+			indent = {
+				char = "│",
+				tab_char = "│",
+			},
+			scope = { enabled = false },
+			exclude = {
+				filetypes = {
+					"help",
+					"alpha",
+					"dashboard",
+					"neo-tree",
+					"Trouble",
+					"trouble",
+					"lazy",
+					"mason",
+					"notify",
+					"toggleterm",
+					"lazyterm",
+					"markdown",
+				},
+			},
+		},
+		main = "ibl",
+	},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		opts = {
+			highlight = {
+				additional_vim_regex_highlighting = { "markdown" },
 			},
 		},
 	},
